@@ -1,3 +1,6 @@
+fork from https://github.com/czp3009/bilibili-api
+已删除原有引用，目前该库的功能暂时可以用，等万一不能用了再重新添加原引用吧。
+
 # Bilibili API 调用库
 该项目提供 Bilibili API 的 Java 调用, 协议来自 Bilibili Android APP 的逆向工程以及截包分析.
 
