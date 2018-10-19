@@ -1,6 +1,6 @@
 package com.dhr.simplepushstreamutil.bean;
 
-public class ResourceUrlInfoBean {
+public class LiveRoomUrlInfoBean {
     private String saveName;
     private String url;
 

@@ -4,29 +4,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ConfigProxyDialog extends JDialog {
+public class BilibiliAccountDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JCheckBox 是否配置全局代理CheckBox;
+    private JButton 保存信息Button;
+    private JButton 登录测试Button;
     private JTextField textField1;
     private JTextField textField2;
 
-    public ConfigProxyDialog() {
+    public BilibiliAccountDialog() {
         setContentPane(contentPane);
-        setResizable(false);
-        setSize(242, 200);
-        setPreferredSize(new Dimension(242, 200));
+        setSize(330, 200);
+        setPreferredSize(new Dimension(330, 200));
         setLocationRelativeTo(null);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -49,13 +42,10 @@ public class ConfigProxyDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
-    }
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
     }
+
 }

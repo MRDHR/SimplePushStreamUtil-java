@@ -4,19 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ConfigProxyDialog extends JDialog {
+public class AreaSettingDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JCheckBox 是否配置全局代理CheckBox;
     private JTextField textField1;
-    private JTextField textField2;
+    private JTree tree1;
 
-    public ConfigProxyDialog() {
+    public AreaSettingDialog() {
         setContentPane(contentPane);
-        setResizable(false);
-        setSize(242, 200);
-        setPreferredSize(new Dimension(242, 200));
+        setSize(330, 320);
+        setPreferredSize(new Dimension(330, 320));
         setLocationRelativeTo(null);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);

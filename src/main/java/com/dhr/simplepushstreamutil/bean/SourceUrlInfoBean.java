@@ -1,6 +1,6 @@
 package com.dhr.simplepushstreamutil.bean;
 
-public class TargetUrlInfoBean {
+public class SourceUrlInfoBean {
     private String saveName;
     private String url;
 

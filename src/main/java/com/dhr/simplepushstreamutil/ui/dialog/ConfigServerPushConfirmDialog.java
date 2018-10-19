@@ -4,19 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ConfigProxyDialog extends JDialog {
+public class ConfigServerPushConfirmDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JCheckBox 是否配置全局代理CheckBox;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JRadioButton 每次弹窗确认RadioButton;
+    private JRadioButton 每次均为后台RadioButton;
+    private JRadioButton 每次均为前台RadioButton;
 
-    public ConfigProxyDialog() {
+    public ConfigServerPushConfirmDialog() {
         setContentPane(contentPane);
-        setResizable(false);
-        setSize(242, 200);
-        setPreferredSize(new Dimension(242, 200));
+        setSize(242, 220);
+        setPreferredSize(new Dimension(242, 220));
         setLocationRelativeTo(null);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -58,4 +57,5 @@ public class ConfigProxyDialog extends JDialog {
         // add your code here if necessary
         dispose();
     }
+
 }

@@ -4,17 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ConfigProxyDialog extends JDialog {
+public class ConfigSchemeDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JCheckBox 是否配置全局代理CheckBox;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JRadioButton youtubeDl原方案RadioButton;
+    private JRadioButton streamLink新方案RadioButton;
 
-    public ConfigProxyDialog() {
+    public ConfigSchemeDialog() {
         setContentPane(contentPane);
-        setResizable(false);
         setSize(242, 200);
         setPreferredSize(new Dimension(242, 200));
         setLocationRelativeTo(null);

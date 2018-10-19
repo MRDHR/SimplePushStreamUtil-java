@@ -1,15 +1,21 @@
 package com.dhr.simplepushstreamutil.ui.dialog;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
-public class RoomSettingDialog extends JDialog {
+public class LiveRoomUrlInfoDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JButton 删除Button;
+    private JList list1;
 
-    public RoomSettingDialog() {
+    public LiveRoomUrlInfoDialog() {
         setContentPane(contentPane);
+        setSize(330, 320);
+        setPreferredSize(new Dimension(330, 320));
+        setLocationRelativeTo(null);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -49,12 +55,5 @@ public class RoomSettingDialog extends JDialog {
     private void onCancel() {
         // add your code here if necessary
         dispose();
-    }
-
-    public static void main(String[] args) {
-        RoomSettingDialog dialog = new RoomSettingDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }
