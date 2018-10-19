@@ -1,13 +1,17 @@
-package com.dhr.simplepushstreamutil;
+package com.dhr.simplepushstreamutil.ui.form;
 
+import com.dhr.simplepushstreamutil.ui.dialog.ConfigProxyDialog;
 import org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.*;
 
-public class MainForm {
+public class MainForm extends JFrame {
+    private ConfigProxyDialog configProxyDialog;//配置代理的对话框
+
     public static void main(String[] args) {
         try {
             BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.generalNoTranslucencyShadow;
@@ -20,6 +24,7 @@ public class MainForm {
         frame.setSize(800, 600);
         frame.setPreferredSize(new Dimension(800, 600));
         frame.setLocationRelativeTo(null);
+        MainForm mainForm = new MainForm();
 
         JMenuBar mb = new JMenuBar();                 //实例菜单栏
         JMenu config = new JMenu("配置");                //实例一个菜单项
@@ -43,7 +48,13 @@ public class MainForm {
         more.add(mi5);                              //添加子目录
         more.add(mi6);
 
-        frame.setContentPane(new MainForm().panel1);
+        mi1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainForm.showConfigProxyDialog();
+            }
+        });
+
+        frame.setContentPane(mainForm.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -51,25 +62,51 @@ public class MainForm {
 
     private MainForm() {
         initView();
-
     }
 
     private void initView() {
         rbLocal.setSelected(true);
+        rbLocal.addChangeListener(rbLocalOrServerChangeListener);
 
-        rbLocal.addChangeListener(changeListener);
+        serverInfoPanel.setVisible(false);
+        btnTestConnect.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+        });
     }
 
-    private ChangeListener changeListener = new ChangeListener() {
+    /**
+     * 本地推流和服务器推流的选择变化监听
+     */
+    private ChangeListener rbLocalOrServerChangeListener = new ChangeListener() {
         @Override
         public void stateChanged(ChangeEvent e) {
             if (rbLocal.isSelected()) {
-                taLog.setText("本机推流已选中");
+                serverInfoPanel.setVisible(false);
             } else {
-                taLog.setText("服务器推流已选中");
+                serverInfoPanel.setVisible(true);
             }
         }
     };
+
+    /**
+     * 显示提示对话框
+     *
+     * @param content
+     */
+    private void showTipsDialog(String content) {
+        JOptionPane.showMessageDialog(this, content, "温馨提示：", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void showConfigProxyDialog() {
+        if (null == configProxyDialog) {
+            configProxyDialog = new ConfigProxyDialog();
+            configProxyDialog.pack();
+        }
+        configProxyDialog.setVisible(true);
+    }
 
     private JPanel panel1;
     private JRadioButton rbLocal;
@@ -79,7 +116,25 @@ public class MainForm {
     private JTextField textField2;
     private JTextField textField3;
     private JTextField textField4;
-    private JButton 测试连接Button;
-    private JButton 保存本地Button;
-    private JButton 获取本地Button;
+    private JButton btnTestConnect;
+    private JButton btnSaveServerInfo;
+    private JButton btnLoadServerInfo;
+    private JButton 保存直播源地址Button;
+    private JButton 获取保存记录Button;
+    private JTextArea textArea1;
+    private JComboBox comboBox1;
+    private JRadioButton 手动填写直播间地址RadioButton;
+    private JRadioButton 通过登录信息获取直播间地址RadioButton;
+    private JButton 保存直播间地址Button;
+    private JButton 获取保存记录Button1;
+    private JRadioButton 画面音频RadioButton;
+    private JRadioButton 只音频需全局代理RadioButton;
+    private JRadioButton 只画面需全局代理RadioButton;
+    private JButton 开启直播间Button;
+    private JButton 关闭直播间Button;
+    private JButton 打开我的直播间Button;
+    private JButton 开始解析Button;
+    private JButton 开始推流Button;
+    private JButton 结束推流Button;
+    private JPanel serverInfoPanel;
 }
