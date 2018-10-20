@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class BiliAccountDialog extends JDialog {
+public class BiliBiliAccountDialog extends JDialog {
     private JPanel contentPane;
     private JButton btnRemove;
     private JButton buttonCancel;
@@ -34,7 +34,7 @@ public class BiliAccountDialog extends JDialog {
     private Gson gson = new Gson();
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
-    public BiliAccountDialog(MainForm mainForm) {
+    public BiliBiliAccountDialog(MainForm mainForm) {
         this.mainForm = mainForm;
         setContentPane(contentPane);
         setSize(330, 200);
@@ -69,14 +69,14 @@ public class BiliAccountDialog extends JDialog {
                 password = tfPassword.getText();
                 if (userName.isEmpty()) {
                     JOptionPane.showMessageDialog(
-                            BiliAccountDialog.this,
+                            BiliBiliAccountDialog.this,
                             "账号不能为空，请输入后重试",
                             "温馨提示：",
                             JOptionPane.INFORMATION_MESSAGE
                     );
                 } else if (password.isEmpty()) {
                     JOptionPane.showMessageDialog(
-                            BiliAccountDialog.this,
+                            BiliBiliAccountDialog.this,
                             "密码不能为空，请输入后重试",
                             "温馨提示：",
                             JOptionPane.INFORMATION_MESSAGE
@@ -111,7 +111,7 @@ public class BiliAccountDialog extends JDialog {
                     if (0 == code) {
                         bilibiliAccount = loginResponseEntity.toBilibiliAccount();
                         JOptionPane.showMessageDialog(
-                                BiliAccountDialog.this,
+                                BiliBiliAccountDialog.this,
                                 "登录成功",
                                 "温馨提示：",
                                 JOptionPane.INFORMATION_MESSAGE
@@ -120,7 +120,7 @@ public class BiliAccountDialog extends JDialog {
                 } catch (IOException e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(
-                            BiliAccountDialog.this,
+                            BiliBiliAccountDialog.this,
                             "网络异常",
                             "温馨提示：",
                             JOptionPane.INFORMATION_MESSAGE
@@ -128,7 +128,7 @@ public class BiliAccountDialog extends JDialog {
                 } catch (LoginException e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(
-                            BiliAccountDialog.this,
+                            BiliBiliAccountDialog.this,
                             "用户名密码错误，请重新输入后再试",
                             "温馨提示：",
                             JOptionPane.INFORMATION_MESSAGE
@@ -136,7 +136,7 @@ public class BiliAccountDialog extends JDialog {
                 } catch (CaptchaMismatchException e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(
-                            BiliAccountDialog.this,
+                            BiliBiliAccountDialog.this,
                             "需要输入验证码，请联系本人",
                             "温馨提示：",
                             JOptionPane.INFORMATION_MESSAGE
