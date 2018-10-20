@@ -1,17 +1,25 @@
 package com.dhr.simplepushstreamutil.ui.dialog;
 
+import com.hiczp.bilibili.api.web.live.entity.LiveAreaListEntity;
+
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class AreaSettingDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textField1;
-    private JTree tree1;
+    private JTextField tfRoomName;
+    private JTree treeArea;
+    private CallBack callBack;
+    private List<LiveAreaListEntity.DataBean> data;
 
-    public AreaSettingDialog() {
+    public AreaSettingDialog(CallBack callBack) {
+        this.callBack = callBack;
         setContentPane(contentPane);
         setSize(330, 320);
         setPreferredSize(new Dimension(330, 320));
@@ -47,9 +55,68 @@ public class AreaSettingDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    public void setData(List<LiveAreaListEntity.DataBean> data) {
+        this.data = data;
+        treeArea.removeAll();
+        // 创建根节点
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("分区列表");
+        for (LiveAreaListEntity.DataBean dataBean : data) {
+            // 创建二级节点
+            DefaultMutableTreeNode secondNode = new DefaultMutableTreeNode(dataBean.getName());
+            for (LiveAreaListEntity.DataBean.ListBean listBean : dataBean.getList()) {
+                // 创建三级节点
+                DefaultMutableTreeNode thirdNode = new DefaultMutableTreeNode(listBean.getName());
+                secondNode.add(thirdNode);
+            }
+            rootNode.add(secondNode);
+        }
+        DefaultTreeModel model = new DefaultTreeModel(rootNode);
+        treeArea.setModel(model);
+        // 设置树显示根节点句柄
+        treeArea.setShowsRootHandles(false);
+        // 设置树节点可编辑
+        treeArea.setEditable(false);
+    }
+
     private void onOK() {
-        // add your code here
-        dispose();
+        String roomName = tfRoomName.getText();
+        if (roomName.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "房间标题为空，请输入房间标题后重试",
+                    "温馨提示：",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) treeArea
+                    .getLastSelectedPathComponent();
+            if (!treeNode.isLeaf()) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "您选择的分区不是最底层分区，须选择最底层的分区",
+                        "温馨提示：",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                String parentName = treeNode.getParent().toString();
+                String currentName = treeNode.toString();
+                for (LiveAreaListEntity.DataBean dataBean : data) {
+                    if (parentName.equals(dataBean.getName())) {
+                        for (LiveAreaListEntity.DataBean.ListBean listBean : dataBean.getList()) {
+                            if (currentName.equals(listBean.getName())) {
+                                callBack.callBack(roomName, listBean.getId());
+                                dispose();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public interface CallBack {
+        void callBack(String roomName, String areaId);
     }
 
     private void onCancel() {

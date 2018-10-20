@@ -89,22 +89,25 @@
               </component>
             </children>
           </grid>
-          <scrollpane id="c53f">
+          <scrollpane id="c53f" binding="contentScrollPanel">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <forms defaultalign-horz="false" defaultalign-vert="false"/>
             </constraints>
             <properties>
+              <autoscrolls value="true"/>
               <preferredSize width="600" height="600"/>
+              <verticalScrollBarPolicy value="22"/>
+              <wheelScrollingEnabled value="true"/>
             </properties>
             <border type="none"/>
             <children>
-              <grid id="6bf90" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+              <grid id="6bf90" binding="controlPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints/>
                 <properties>
                   <autoscrolls value="false"/>
                   <opaque value="false"/>
-                  <preferredSize width="0" height="780"/>
+                  <preferredSize width="0" height="750"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -435,7 +438,7 @@
                           <text value="分辨率列表"/>
                         </properties>
                       </component>
-                      <component id="7a007" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                      <component id="7a007" class="javax.swing.JComboBox" binding="cbFormatList">
                         <constraints>
                           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -459,7 +462,7 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="bcd55" class="javax.swing.JRadioButton" binding="手动填写直播间地址RadioButton" default-binding="true">
+                      <component id="bcd55" class="javax.swing.JRadioButton" binding="rbInputLiveRoomUrl">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <forms/>
@@ -469,7 +472,7 @@
                           <text value="手动填写直播间地址"/>
                         </properties>
                       </component>
-                      <component id="3d692" class="javax.swing.JRadioButton" binding="通过登录信息获取直播间地址RadioButton" default-binding="true">
+                      <component id="3d692" class="javax.swing.JRadioButton" binding="rbGetLiveRoomUrl">
                         <constraints>
                           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <forms/>
@@ -481,7 +484,7 @@
                       </component>
                     </children>
                   </grid>
-                  <grid id="9d435" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                  <grid id="9d435" binding="liveRoomPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                     <constraints/>
                     <properties>
                       <preferredSize width="550" height="165"/>
@@ -523,7 +526,7 @@
                             </properties>
                             <border type="none"/>
                             <children>
-                              <component id="e557a" class="javax.swing.JTextArea" default-binding="true">
+                              <component id="e557a" class="javax.swing.JTextArea" binding="taLiveRoomUrl">
                                 <constraints/>
                                 <properties>
                                   <lineWrap value="true"/>
@@ -567,7 +570,7 @@
                               <gridbag weightx="1.0" weighty="0.0"/>
                             </constraints>
                           </hspacer>
-                          <component id="eb7f6" class="javax.swing.JButton" binding="获取保存记录Button1" default-binding="true">
+                          <component id="eb7f6" class="javax.swing.JButton" binding="btnGetLiveRoomInfo">
                             <constraints>
                               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                               <gridbag weightx="1.0" weighty="1.0"/>
@@ -587,7 +590,7 @@
                     </properties>
                     <border type="none" title="推流选项"/>
                     <children>
-                      <component id="f7081" class="javax.swing.JRadioButton" binding="画面音频RadioButton" default-binding="true">
+                      <component id="f7081" class="javax.swing.JRadioButton" binding="rbBoth">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -596,7 +599,7 @@
                           <text value="画面+音频"/>
                         </properties>
                       </component>
-                      <component id="2582d" class="javax.swing.JRadioButton" binding="只音频需全局代理RadioButton" default-binding="true">
+                      <component id="2582d" class="javax.swing.JRadioButton" binding="rbOnlyAudio">
                         <constraints>
                           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -605,7 +608,7 @@
                           <text value="只音频(需全局代理)"/>
                         </properties>
                       </component>
-                      <component id="20691" class="javax.swing.JRadioButton" binding="只画面需全局代理RadioButton" default-binding="true">
+                      <component id="20691" class="javax.swing.JRadioButton" binding="rbOnlyImage">
                         <constraints>
                           <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -640,14 +643,14 @@
                       </hspacer>
                     </children>
                   </grid>
-                  <grid id="cb4b" layout-manager="GridBagLayout">
+                  <grid id="cb4b" binding="liveRoomControlPanel" layout-manager="GridBagLayout">
                     <constraints/>
                     <properties>
                       <preferredSize width="550" height="54"/>
                     </properties>
                     <border type="none" title="直播间相关操作"/>
                     <children>
-                      <component id="95a38" class="javax.swing.JButton" binding="开启直播间Button" default-binding="true">
+                      <component id="95a38" class="javax.swing.JButton" binding="btnOpenLiveRoom">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -656,7 +659,7 @@
                           <text value="开启直播间"/>
                         </properties>
                       </component>
-                      <component id="2f0e6" class="javax.swing.JButton" binding="关闭直播间Button" default-binding="true">
+                      <component id="2f0e6" class="javax.swing.JButton" binding="btnCloseLiveRoom">
                         <constraints>
                           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -665,7 +668,7 @@
                           <text value="关闭直播间"/>
                         </properties>
                       </component>
-                      <component id="5efe9" class="javax.swing.JButton" binding="打开我的直播间Button" default-binding="true">
+                      <component id="5efe9" class="javax.swing.JButton" binding="btnToMyLiveRoom">
                         <constraints>
                           <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -707,7 +710,7 @@
                     </properties>
                     <border type="none" title="推流相关操作"/>
                     <children>
-                      <component id="869c0" class="javax.swing.JButton" binding="开始解析Button" default-binding="true">
+                      <component id="869c0" class="javax.swing.JButton" binding="btnGetFormatList">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -716,7 +719,7 @@
                           <text value="开始解析"/>
                         </properties>
                       </component>
-                      <component id="36e5c" class="javax.swing.JButton" binding="开始推流Button" default-binding="true">
+                      <component id="36e5c" class="javax.swing.JButton" binding="btnPushStream">
                         <constraints>
                           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -725,7 +728,7 @@
                           <text value="开始推流"/>
                         </properties>
                       </component>
-                      <component id="c3aa7" class="javax.swing.JButton" binding="结束推流Button" default-binding="true">
+                      <component id="c3aa7" class="javax.swing.JButton" binding="btnStopStream">
                         <constraints>
                           <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="0.0" weighty="0.0"/>
@@ -776,6 +779,11 @@
     <group name="buttonGroup2">
       <member id="bcd55"/>
       <member id="3d692"/>
+    </group>
+    <group name="buttonGroup1">
+      <member id="f7081"/>
+      <member id="2582d"/>
+      <member id="20691"/>
     </group>
   </buttonGroups>
 </form>

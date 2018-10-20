@@ -5,14 +5,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ConfigProxyDialog extends JDialog {
+    private CallBack callBack;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JCheckBox 是否配置全局代理CheckBox;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JCheckBox cbEnableProxy;
+    private JTextField tfProxyIp;
+    private JTextField tfProxyPort;
 
-    public ConfigProxyDialog() {
+    public ConfigProxyDialog(CallBack callBack) {
+        this.callBack = callBack;
         setContentPane(contentPane);
         setResizable(false);
         setSize(242, 200);
@@ -50,12 +52,53 @@ public class ConfigProxyDialog extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        if (cbEnableProxy.isSelected()) {
+            String ip = tfProxyIp.getText();
+            String port = tfProxyPort.getText();
+            if (null == ip || ip.isEmpty()) {
+                // 消息对话框无返回, 仅做通知作用
+                JOptionPane.showMessageDialog(
+                        this,
+                        "代理ip不能为空",
+                        "温馨提示：",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else if (null == port || port.isEmpty()) {
+                // 消息对话框无返回, 仅做通知作用
+                JOptionPane.showMessageDialog(
+                        this,
+                        "端口号不能为空",
+                        "温馨提示：",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                try {
+                    int cachePort = Integer.parseInt(port);
+                    callBack.confirm(ip, cachePort);
+                    dispose();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "端口号错误",
+                            "温馨提示：",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            }
+        } else {
+            callBack.confirm("", 0);
+            dispose();
+        }
     }
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
     }
+
+    public interface CallBack {
+        void confirm(String ip, int port);
+    }
+
 }
