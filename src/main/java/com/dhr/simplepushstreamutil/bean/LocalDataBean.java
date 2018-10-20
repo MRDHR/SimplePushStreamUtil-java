@@ -1,14 +1,16 @@
 package com.dhr.simplepushstreamutil.bean;
 
+import com.hiczp.bilibili.api.BilibiliAccount;
+
 import java.util.List;
 
 public class LocalDataBean {
     private ConfigLinuxPushBean configLinuxPushBean;
     private ConfigSchemeBean configSchemeBean;
-    private LoginInfoBean loginInfoBean;
     private List<SourceUrlInfoBean> sourceUrlInfoBeans;
     private List<ServerInfoBean> serverInfoBeans;
     private List<LiveRoomUrlInfoBean> liveRoomUrlInfoBeans;
+    private BilibiliAccount bilibiliAccount;
 
     public ConfigLinuxPushBean getConfigLinuxPushBean() {
         return configLinuxPushBean;
@@ -24,14 +26,6 @@ public class LocalDataBean {
 
     public void setConfigSchemeBean(ConfigSchemeBean configSchemeBean) {
         this.configSchemeBean = configSchemeBean;
-    }
-
-    public LoginInfoBean getLoginInfoBean() {
-        return loginInfoBean;
-    }
-
-    public void setLoginInfoBean(LoginInfoBean loginInfoBean) {
-        this.loginInfoBean = loginInfoBean;
     }
 
     public List<SourceUrlInfoBean> getSourceUrlInfoBeans() {
@@ -58,4 +52,11 @@ public class LocalDataBean {
         this.liveRoomUrlInfoBeans = liveRoomUrlInfoBeans;
     }
 
+    public BilibiliAccount getBilibiliAccount() {
+        return bilibiliAccount;
+    }
+
+    public void setBilibiliAccount(BilibiliAccount bilibiliAccount) {
+        this.bilibiliAccount = bilibiliAccount;
+    }
 }

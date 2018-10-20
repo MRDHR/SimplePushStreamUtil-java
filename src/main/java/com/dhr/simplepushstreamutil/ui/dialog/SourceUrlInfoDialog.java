@@ -17,7 +17,7 @@ public class SourceUrlInfoDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JList listResourceUrlInfo;
+    private JList listSourceUrlInfo;
     private JButton btnRemove;
     private JsonUtil jsonUtil = new JsonUtil();
     private List<SourceUrlInfoBean> sourceUrlInfoBeans;
@@ -75,14 +75,14 @@ public class SourceUrlInfoDialog extends JDialog {
         if (null == sourceUrlInfoBeans) {
             sourceUrlInfoBeans = new ArrayList<>();
         }
-        listResourceUrlInfo.removeAll();
+        listSourceUrlInfo.removeAll();
         DefaultListModel listModel = new DefaultListModel();
         for (SourceUrlInfoBean bean : sourceUrlInfoBeans) {
             listModel.addElement(bean.getSaveName());
         }
-        listResourceUrlInfo.setModel(listModel);
+        listSourceUrlInfo.setModel(listModel);
         if (null != sourceUrlInfoBeans && !sourceUrlInfoBeans.isEmpty()) {
-            listResourceUrlInfo.setSelectedIndex(0);
+            listSourceUrlInfo.setSelectedIndex(0);
         }
     }
 
@@ -97,7 +97,7 @@ public class SourceUrlInfoDialog extends JDialog {
     }
 
     private void remove() {
-        int selectedIndex = listResourceUrlInfo.getSelectedIndex();
+        int selectedIndex = listSourceUrlInfo.getSelectedIndex();
         if (selectedIndex >= 0) {
             if (!sourceUrlInfoBeans.isEmpty()) {
                 sourceUrlInfoBeans.remove(selectedIndex);
@@ -111,7 +111,7 @@ public class SourceUrlInfoDialog extends JDialog {
     }
 
     private void onOK() {
-        int selectedIndex = listResourceUrlInfo.getSelectedIndex();
+        int selectedIndex = listSourceUrlInfo.getSelectedIndex();
         if (selectedIndex >= 0) {
             SourceUrlInfoBean resourceUrlInfoBean = sourceUrlInfoBeans.get(selectedIndex);
             callBack.confirm(resourceUrlInfoBean.getUrl());

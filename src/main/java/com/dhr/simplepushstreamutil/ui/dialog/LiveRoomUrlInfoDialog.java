@@ -1,17 +1,33 @@
 package com.dhr.simplepushstreamutil.ui.dialog;
 
+import com.dhr.simplepushstreamutil.bean.LiveRoomUrlInfoBean;
+import com.dhr.simplepushstreamutil.bean.LocalDataBean;
+import com.dhr.simplepushstreamutil.ui.form.MainForm;
+import com.dhr.simplepushstreamutil.util.JsonUtil;
+import com.google.gson.Gson;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LiveRoomUrlInfoDialog extends JDialog {
+    private MainForm mainForm;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JButton 删除Button;
-    private JList list1;
+    private JButton btnRemove;
+    private JList listLiveRoom;
+    private JsonUtil jsonUtil = new JsonUtil();
+    private List<LiveRoomUrlInfoBean> liveRoomUrlInfoBeans;
+    private Gson gson = new Gson();
+    private CallBack callBack;
+    private LocalDataBean localDataBean;
 
-    public LiveRoomUrlInfoDialog() {
+    public LiveRoomUrlInfoDialog(MainForm mainForm, CallBack callBack) {
+        this.mainForm = mainForm;
+        this.callBack = callBack;
         setContentPane(contentPane);
         setSize(330, 320);
         setPreferredSize(new Dimension(330, 320));
@@ -45,11 +61,64 @@ public class LiveRoomUrlInfoDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        btnRemove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remove();
+            }
+        });
+    }
+
+    private void loadDataFromJson() {
+        localDataBean = mainForm.getLocalDataBean();
+        liveRoomUrlInfoBeans = localDataBean.getLiveRoomUrlInfoBeans();
+        if (null == liveRoomUrlInfoBeans) {
+            liveRoomUrlInfoBeans = new ArrayList<>();
+        }
+        listLiveRoom.removeAll();
+        DefaultListModel listModel = new DefaultListModel();
+        for (LiveRoomUrlInfoBean bean : liveRoomUrlInfoBeans) {
+            listModel.addElement(bean.getSaveName());
+        }
+        listLiveRoom.setModel(listModel);
+        if (null != liveRoomUrlInfoBeans && !liveRoomUrlInfoBeans.isEmpty()) {
+            listLiveRoom.setSelectedIndex(0);
+        }
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        loadDataFromJson();
+        super.setVisible(b);
+    }
+
+    public interface CallBack {
+        void confirm(String url);
+    }
+
+    private void remove() {
+        int selectedIndex = listLiveRoom.getSelectedIndex();
+        if (selectedIndex >= 0) {
+            if (!liveRoomUrlInfoBeans.isEmpty()) {
+                liveRoomUrlInfoBeans.remove(selectedIndex);
+                localDataBean.setLiveRoomUrlInfoBeans(liveRoomUrlInfoBeans);
+                jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(localDataBean));
+                loadDataFromJson();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "请选择需要删除的记录", "温馨提示：", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        int selectedIndex = listLiveRoom.getSelectedIndex();
+        if (selectedIndex >= 0) {
+            LiveRoomUrlInfoBean liveRoomUrlInfoBean = liveRoomUrlInfoBeans.get(selectedIndex);
+            callBack.confirm(liveRoomUrlInfoBean.getUrl());
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "请选择需要提取的记录", "温馨提示：", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void onCancel() {

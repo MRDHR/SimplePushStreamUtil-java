@@ -62,7 +62,7 @@
         <properties/>
         <border type="none" title="推流方式"/>
         <children>
-          <component id="abd53" class="javax.swing.JRadioButton" binding="每次弹窗确认RadioButton" default-binding="true">
+          <component id="abd53" class="javax.swing.JRadioButton" binding="rbConfirmEveryTime">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="0"/>
@@ -73,7 +73,7 @@
               <text value="每次弹窗确认"/>
             </properties>
           </component>
-          <component id="da432" class="javax.swing.JRadioButton" binding="每次均为后台RadioButton" default-binding="true">
+          <component id="da432" class="javax.swing.JRadioButton" binding="rbBackgroundEveryTime">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="0"/>
@@ -83,7 +83,7 @@
               <text value="每次均为后台"/>
             </properties>
           </component>
-          <component id="8fc3f" class="javax.swing.JRadioButton" binding="每次均为前台RadioButton" default-binding="true">
+          <component id="8fc3f" class="javax.swing.JRadioButton" binding="rbFrontEveryTime">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="0"/>
