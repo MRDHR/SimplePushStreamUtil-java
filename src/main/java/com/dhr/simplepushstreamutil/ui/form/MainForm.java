@@ -42,7 +42,7 @@ public class MainForm extends JFrame {
     private int proxyPort;
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private BiliBiliAccountDialog bilibiliAccountDialog;
+    private BiliAccountDialog bilibiliAccountDialog;
     private ConfigServerPushConfirmDialog configServerPushConfirmDialog;
     private ConfigSchemeDialog configSchemeDialog;
     private AreaSettingDialog areaSettingDialog;
@@ -612,7 +612,7 @@ public class MainForm extends JFrame {
 
     private void showBilibiliAccountDialog() {
         if (null == bilibiliAccountDialog) {
-            bilibiliAccountDialog = new BiliBiliAccountDialog(this);
+            bilibiliAccountDialog = new BiliAccountDialog(this);
             bilibiliAccountDialog.pack();
         }
         bilibiliAccountDialog.setVisible(true);
