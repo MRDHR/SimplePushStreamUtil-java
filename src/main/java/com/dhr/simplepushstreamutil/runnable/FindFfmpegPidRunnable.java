@@ -6,13 +6,13 @@ public class FindFfmpegPidRunnable implements Runnable {
     private final OutputStream ostrm_;
     private final InputStream istrm_;
     private FindFfmpegCallBack findFfmpegCallBack;
-    private String m3u8Url;
+    private String liveRoomUrl;
 
-    public FindFfmpegPidRunnable(InputStream istrm, OutputStream ostrm, FindFfmpegCallBack findFfmpegCallBack, String m3u8Url) {
+    public FindFfmpegPidRunnable(InputStream istrm, OutputStream ostrm, FindFfmpegCallBack findFfmpegCallBack, String liveRoomUrl) {
         istrm_ = istrm;
         ostrm_ = ostrm;
         this.findFfmpegCallBack = findFfmpegCallBack;
-        this.m3u8Url = m3u8Url;
+        this.liveRoomUrl = liveRoomUrl;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class FindFfmpegPidRunnable implements Runnable {
                     (new InputStreamReader(istrm_, "GBK"));
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
-                if (line.contains(m3u8Url)) {
+                if (line.contains(liveRoomUrl)) {
                     String substring = line.substring(line.lastIndexOf("ffmpeg.exe") + 10);
                     String trim = substring.replaceAll(" ", "").trim();
                     System.out.println(trim);

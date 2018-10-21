@@ -20,9 +20,7 @@ public class ServerInfoDialog extends JDialog {
     private JButton buttonCancel;
     private JButton btnRemove;
     private JList listServerInfo;
-    private JsonUtil jsonUtil = new JsonUtil();
     private List<ServerInfoBean> serverInfoBeans;
-    private Gson gson = new Gson();
     private CallBack callBack;
     private LocalDataBean localDataBean;
 
@@ -100,7 +98,7 @@ public class ServerInfoDialog extends JDialog {
             if (!serverInfoBeans.isEmpty()) {
                 serverInfoBeans.remove(selectedIndex);
                 localDataBean.setServerInfoBeans(serverInfoBeans);
-                jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(localDataBean));
+                mainForm.getJsonUtil().saveDataToFile(LocalDataBean.class.getSimpleName(), mainForm.getGson().toJson(localDataBean));
                 loadDataFromJson();
             }
         } else {

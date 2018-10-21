@@ -19,9 +19,7 @@ public class SourceUrlInfoDialog extends JDialog {
     private JButton buttonCancel;
     private JList listSourceUrlInfo;
     private JButton btnRemove;
-    private JsonUtil jsonUtil = new JsonUtil();
     private List<SourceUrlInfoBean> sourceUrlInfoBeans;
-    private Gson gson = new Gson();
     private CallBack callBack;
     private LocalDataBean localDataBean;
 
@@ -102,7 +100,7 @@ public class SourceUrlInfoDialog extends JDialog {
             if (!sourceUrlInfoBeans.isEmpty()) {
                 sourceUrlInfoBeans.remove(selectedIndex);
                 localDataBean.setSourceUrlInfoBeans(sourceUrlInfoBeans);
-                jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(localDataBean));
+                mainForm.getJsonUtil().saveDataToFile(LocalDataBean.class.getSimpleName(), mainForm.getGson().toJson(localDataBean));
                 loadDataFromJson();
             }
         } else {

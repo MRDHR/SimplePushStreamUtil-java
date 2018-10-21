@@ -25,6 +25,7 @@ public class AreaSettingDialog extends JDialog {
         setPreferredSize(new Dimension(330, 320));
         setLocationRelativeTo(null);
         setModal(true);
+        setTitle("分区和标题");
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {

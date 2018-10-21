@@ -9,18 +9,20 @@ public class ConfigProxyDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JCheckBox cbEnableProxy;
+    private JCheckBox cbGetFormatListProxy;
     private JTextField tfProxyIp;
     private JTextField tfProxyPort;
+    private JCheckBox cbOpenLiveRoomProxy;
 
     public ConfigProxyDialog(CallBack callBack) {
         this.callBack = callBack;
         setContentPane(contentPane);
         setResizable(false);
-        setSize(242, 200);
-        setPreferredSize(new Dimension(242, 200));
+        setSize(270, 270);
+        setPreferredSize(new Dimension(270, 270));
         setLocationRelativeTo(null);
         setModal(true);
+        setTitle("配置全局代理");
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -52,7 +54,7 @@ public class ConfigProxyDialog extends JDialog {
     }
 
     private void onOK() {
-        if (cbEnableProxy.isSelected()) {
+        if (cbGetFormatListProxy.isSelected() || cbOpenLiveRoomProxy.isSelected()) {
             String ip = tfProxyIp.getText();
             String port = tfProxyPort.getText();
             if (null == ip || ip.isEmpty()) {
@@ -74,7 +76,7 @@ public class ConfigProxyDialog extends JDialog {
             } else {
                 try {
                     int cachePort = Integer.parseInt(port);
-                    callBack.confirm(ip, cachePort);
+                    callBack.confirm(cbGetFormatListProxy.isSelected(), cbOpenLiveRoomProxy.isSelected(), ip, cachePort);
                     dispose();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -87,7 +89,7 @@ public class ConfigProxyDialog extends JDialog {
                 }
             }
         } else {
-            callBack.confirm("", 0);
+            callBack.confirm(false, false, "", 0);
             dispose();
         }
     }
@@ -98,7 +100,7 @@ public class ConfigProxyDialog extends JDialog {
     }
 
     public interface CallBack {
-        void confirm(String ip, int port);
+        void confirm(boolean get, boolean open, String ip, int port);
     }
 
 }

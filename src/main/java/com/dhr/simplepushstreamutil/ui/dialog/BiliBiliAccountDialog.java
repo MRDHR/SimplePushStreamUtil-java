@@ -2,8 +2,6 @@ package com.dhr.simplepushstreamutil.ui.dialog;
 
 import com.dhr.simplepushstreamutil.bean.LocalDataBean;
 import com.dhr.simplepushstreamutil.ui.form.MainForm;
-import com.dhr.simplepushstreamutil.util.JsonUtil;
-import com.google.gson.Gson;
 import com.hiczp.bilibili.api.BilibiliAPI;
 import com.hiczp.bilibili.api.BilibiliAccount;
 import com.hiczp.bilibili.api.passport.entity.LoginResponseEntity;
@@ -30,8 +28,6 @@ public class BiliBiliAccountDialog extends JDialog {
     private String userName;
     private String password;
     private BilibiliAccount bilibiliAccount;
-    private JsonUtil jsonUtil = new JsonUtil();
-    private Gson gson = new Gson();
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     public BiliBiliAccountDialog(MainForm mainForm) {
@@ -41,6 +37,7 @@ public class BiliBiliAccountDialog extends JDialog {
         setPreferredSize(new Dimension(330, 200));
         setLocationRelativeTo(null);
         setModal(true);
+        setTitle("配置B站账号");
         getRootPane().setDefaultButton(btnRemove);
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -155,35 +152,29 @@ public class BiliBiliAccountDialog extends JDialog {
                     JOptionPane.INFORMATION_MESSAGE
             );
         } else {
-            if (null == jsonUtil) {
-                jsonUtil = new JsonUtil();
-            }
-            if (null == gson) {
-                gson = new Gson();
-            }
             mainForm.getLocalDataBean().setBilibiliAccount(bilibiliAccount);
-            jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(mainForm.getLocalDataBean()));
+            mainForm.getJsonUtil().saveDataToFile(LocalDataBean.class.getSimpleName(), mainForm.getGson().toJson(mainForm.getLocalDataBean()));
             JOptionPane.showMessageDialog(
                     this,
                     "登录信息保存成功",
                     "温馨提示：",
                     JOptionPane.INFORMATION_MESSAGE
             );
-            mainForm.showOrHideLiveRoomPanel();
+            mainForm.showOrHideLiveRoomControlPanel();
         }
     }
 
     private void removeLoginInfo() {
         BilibiliAccount bilibiliAccount = new BilibiliAccount("", "", 0L, 0L, 0L);
         mainForm.getLocalDataBean().setBilibiliAccount(bilibiliAccount);
-        jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(mainForm.getLocalDataBean()));
+        mainForm.getJsonUtil().saveDataToFile(LocalDataBean.class.getSimpleName(), mainForm.getGson().toJson(mainForm.getLocalDataBean()));
         JOptionPane.showMessageDialog(
                 this,
                 "登录信息删除成功",
                 "温馨提示：",
                 JOptionPane.INFORMATION_MESSAGE
         );
-        mainForm.showOrHideLiveRoomPanel();
+        mainForm.showOrHideLiveRoomControlPanel();
     }
 
     private void onCancel() {

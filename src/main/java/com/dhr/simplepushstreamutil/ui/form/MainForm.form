@@ -173,6 +173,7 @@
                             </constraints>
                             <properties>
                               <preferredSize width="150" height="30"/>
+                              <text value="22"/>
                             </properties>
                           </component>
                           <component id="78933" class="javax.swing.JLabel">
@@ -193,6 +194,7 @@
                             </constraints>
                             <properties>
                               <preferredSize width="150" height="30"/>
+                              <text value="root"/>
                             </properties>
                           </component>
                           <component id="87df0" class="javax.swing.JTextField" binding="tfUserPassword">

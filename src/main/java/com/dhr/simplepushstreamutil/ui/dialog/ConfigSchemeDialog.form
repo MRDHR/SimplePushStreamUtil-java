@@ -60,7 +60,7 @@
         <properties/>
         <border type="none" title="解析方案"/>
         <children>
-          <component id="97999" class="javax.swing.JRadioButton" binding="youtubeDl原方案RadioButton" default-binding="true">
+          <component id="97999" class="javax.swing.JRadioButton" binding="rbYoutubeDl">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="0"/>
@@ -70,7 +70,7 @@
               <text value="Youtube-dl(原方案)"/>
             </properties>
           </component>
-          <component id="bf9bb" class="javax.swing.JRadioButton" binding="streamLink新方案RadioButton" default-binding="true">
+          <component id="bf9bb" class="javax.swing.JRadioButton" binding="rbStreamLink">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
               <forms top="0" left="10" bottom="0" right="0"/>
@@ -84,4 +84,10 @@
       </grid>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="97999"/>
+      <member id="bf9bb"/>
+    </group>
+  </buttonGroups>
 </form>

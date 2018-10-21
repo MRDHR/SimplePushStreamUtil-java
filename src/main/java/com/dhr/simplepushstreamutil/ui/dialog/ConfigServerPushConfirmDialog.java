@@ -19,8 +19,6 @@ public class ConfigServerPushConfirmDialog extends JDialog {
     private JRadioButton rbBackgroundEveryTime;
     private JRadioButton rbFrontEveryTime;
 
-    private JsonUtil jsonUtil = new JsonUtil();
-    private Gson gson = new Gson();
     private ConfigLinuxPushBean configLinuxPushBean;
 
 
@@ -31,6 +29,7 @@ public class ConfigServerPushConfirmDialog extends JDialog {
         setPreferredSize(new Dimension(242, 220));
         setLocationRelativeTo(null);
         setModal(true);
+        setTitle("配置服务器推流方式");
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -90,7 +89,7 @@ public class ConfigServerPushConfirmDialog extends JDialog {
             configLinuxPushBean.setStatus(2);
         }
         mainForm.getLocalDataBean().setConfigLinuxPushBean(configLinuxPushBean);
-        jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(mainForm.getLocalDataBean()));
+        mainForm.getJsonUtil().saveDataToFile(LocalDataBean.class.getSimpleName(), mainForm.getGson().toJson(mainForm.getLocalDataBean()));
         dispose();
     }
 

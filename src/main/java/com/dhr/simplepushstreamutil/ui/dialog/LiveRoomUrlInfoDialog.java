@@ -19,9 +19,7 @@ public class LiveRoomUrlInfoDialog extends JDialog {
     private JButton buttonCancel;
     private JButton btnRemove;
     private JList listLiveRoom;
-    private JsonUtil jsonUtil = new JsonUtil();
     private List<LiveRoomUrlInfoBean> liveRoomUrlInfoBeans;
-    private Gson gson = new Gson();
     private CallBack callBack;
     private LocalDataBean localDataBean;
 
@@ -102,7 +100,7 @@ public class LiveRoomUrlInfoDialog extends JDialog {
             if (!liveRoomUrlInfoBeans.isEmpty()) {
                 liveRoomUrlInfoBeans.remove(selectedIndex);
                 localDataBean.setLiveRoomUrlInfoBeans(liveRoomUrlInfoBeans);
-                jsonUtil.saveDataToFile(LocalDataBean.class.getSimpleName(), gson.toJson(localDataBean));
+                mainForm.getJsonUtil().saveDataToFile(LocalDataBean.class.getSimpleName(), mainForm.getGson().toJson(localDataBean));
                 loadDataFromJson();
             }
         } else {
